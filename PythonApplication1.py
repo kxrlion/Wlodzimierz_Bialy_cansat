@@ -102,60 +102,106 @@ def to_map(pix_acc_obj):
     PIL_S_V_converter = 2.55
     #print(150 * PIL_H_converter)
     #woda h-150-255 
+    
+    #oryginal
+    #H_woda_D = int(150 * PIL_H_converter)
+    #H_woda_G = int(255 * PIL_H_converter)
+    
+    #test
     H_woda_D = int(150 * PIL_H_converter)
     H_woda_G = int(255 * PIL_H_converter)
+    
     #budynki s<5% i v<5% lub h <36 i >255
-    H_budynki_D = int(36 * PIL_H_converter)
-    H_budynki_G = int(255 * PIL_H_converter)
+    
+    #oryginal
+    #H_budynki_D = int(255 * PIL_H_converter)
+    #H_budynki_G = 255
+    #S_budynki = int(10 * PIL_S_V_converter)
+    #V_budynki = int(10 * PIL_S_V_converter)
+
+    #test
+    H_budynki_D = int(255 * PIL_H_converter)
+    H_budynki_G = 255
     S_budynki = int(5 * PIL_S_V_converter)
     V_budynki = int(5 * PIL_S_V_converter)
+    
+    
     #laki h-62-86
+    
+    #oryginal
+    #H_laki_D = int(62 * PIL_H_converter)
+    #H_laki_G = int(86 * PIL_H_converter)
+
+    #test
     H_laki_D = int(62 * PIL_H_converter)
     H_laki_G = int(86 * PIL_H_converter)
+    
+    
     #lasy h-86-150
+    
+    #oryginal
+    #H_lasy_D = int(86 * PIL_H_converter)
+    #H_lasy_G = int(150 * PIL_H_converter)
+
+    #test
     H_lasy_D = int(86 * PIL_H_converter)
     H_lasy_G = int(150 * PIL_H_converter)
+    
     #piasek h-36-62 
-    #H_piasek_D = int(36 * PIL_H_converter)
+    #oryginal
+    #H_piasek_D = int(0 * PIL_H_converter)
     #H_piasek_G = int(62 * PIL_H_converter)
+
+    #test
     H_piasek_D = int(0 * PIL_H_converter)
     H_piasek_G = int(62 * PIL_H_converter)
+
 
     for j in range(height):
         for i in range(width):
             #woda
             if(pix_acc_obj[i,j][0]>H_woda_D and pix_acc_obj[i,j][0]<H_woda_G):
                 pix_acc_obj[i,j] = (int(198 * PIL_H_converter),255,255)
-            ##budynki
-            #if((pix_acc_obj[i,j][0]<H_budynki_D and pix_acc_obj[i,j][0]>H_budynki_G) or (pix_acc_obj[i,j][1]<S_budynki or pix_acc_obj[i,j][2]<S_budynki)):
-            #    pix_acc_obj[i,j] = (0,int(3 * PIL_S_V_converter),int(74 * PIL_S_V_converter))
+            #budynki
+            if((pix_acc_obj[i,j][0]>H_budynki_D and pix_acc_obj[i,j][0]<H_budynki_G) or (pix_acc_obj[i,j][1]<S_budynki or pix_acc_obj[i,j][2]<V_budynki)):
+                pix_acc_obj[i,j] = (0,int(3 * PIL_S_V_converter),int(74 * PIL_S_V_converter))
             #laki
             if(pix_acc_obj[i,j][0]>H_laki_D and pix_acc_obj[i,j][0]<H_laki_G):
-                pix_acc_obj[i,j] = (int(70 * PIL_H_converter),255,255)
+                pix_acc_obj[i,j] = (int(135 * PIL_H_converter),int(78*PIL_S_V_converter),int(63*PIL_S_V_converter))
             #lasy
             if(pix_acc_obj[i,j][0]>H_lasy_D and pix_acc_obj[i,j][0]<H_lasy_G):
-                pix_acc_obj[i,j] = (int(120 * PIL_H_converter),255,255)
+                pix_acc_obj[i,j] = (int(135 * PIL_H_converter),int(79*PIL_S_V_converter),int(36*PIL_S_V_converter))
             #piasek
             if(pix_acc_obj[i,j][0]>H_piasek_D and pix_acc_obj[i,j][0]<H_piasek_G):
-                pix_acc_obj[i,j] = (int(63 * PIL_H_converter),255,255)
+                pix_acc_obj[i,j] = (int(40 * PIL_H_converter),int(52*PIL_S_V_converter),int(79*PIL_S_V_converter))
+    #TODO:
+    #przyblizenie = 10
+    #ile_wody = 0
+    #for j in range(int(przyblizenie/2),height-int(przyblizenie/2),1):
+    #    for i in range(int(przyblizenie/2),width-int(przyblizenie/2),1):
+    #        for k in range(j-int(przyblizenie/2),j+int(przyblizenie/2),1):
+    #            for h in range(i-int(przyblizenie/2),i+int(przyblizenie/2),1):
+    #                if pix_acc_obj[h,k][0]==int(198*PIL_H_converter):
+    #                    ile_wody=ile_wody+1
+    #        if(ile_wody<=100):
+    #            pix_acc_obj[i,j]=(0,255,255)
 
-#porownanie
-def porownanie(pix_acc_obj1,pix_acc_obj2){
-    
-    
-}
 
 
 #img = ImageEnhance.Contrast(img).enhance(1.5)
 #gaussian_blur(pixel_access_object,1)
-is_edge=edge_detection(pixel_access_object,img)
+#print("pierwszy blur")
+#is_edge=edge_detection(pixel_access_object,img)
+#print("krawedzie")
 #gaussian_blur(pixel_access_object,1)
+#print("drugi blur")
 to_map(pixel_access_object)
-for j in range(1,height-2):
-        for i in range(1,width-2):
-            if(is_edge[i][j]==1):
-               pixel_access_object[i,j]=(0,0,0)
+#print("do mapki")
+#for j in range(1,height-2):
+#        for i in range(1,width-2):
+#            if(is_edge[i][j]==1):
+#               pixel_access_object[i,j]=(0,0,0)
 #gaussian_blur(pixel_access_object,1)
-
+print("trzeci blur")
 img.show()
 

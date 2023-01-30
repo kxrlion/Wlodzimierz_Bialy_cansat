@@ -189,19 +189,19 @@ def to_map(pix_acc_obj):
 
 
 #img = ImageEnhance.Contrast(img).enhance(1.5)
-#gaussian_blur(pixel_access_object,1)
-#print("pierwszy blur")
-#is_edge=edge_detection(pixel_access_object,img)
-#print("krawedzie")
-#gaussian_blur(pixel_access_object,1)
-#print("drugi blur")
+gaussian_blur(pixel_access_object,1)
+print("pierwszy blur")
+is_edge=edge_detection(pixel_access_object,img)
+print("krawedzie")
+gaussian_blur(pixel_access_object,1)
+print("drugi blur")
 to_map(pixel_access_object)
-#print("do mapki")
-#for j in range(1,height-2):
-#        for i in range(1,width-2):
-#            if(is_edge[i][j]==1):
-#               pixel_access_object[i,j]=(0,0,0)
-#gaussian_blur(pixel_access_object,1)
+print("do mapki")
+for j in range(1,height-2):
+        for i in range(1,width-2):
+            if(is_edge[i][j]==1):
+               pixel_access_object[i,j]=(0,0,0)
+gaussian_blur(pixel_access_object,1)
 print("trzeci blur")
 img.show()
 

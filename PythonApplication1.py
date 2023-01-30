@@ -205,3 +205,6 @@ gaussian_blur(pixel_access_object,1)
 print("trzeci blur")
 img.show()
 
+
+print("aaaaaa")
+

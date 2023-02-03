@@ -27,10 +27,8 @@ from PIL import ImageGrab
 #save_path = "C:\\Users\\kxrli\\source\\repos\\PythonApplication1\\ss.jpg"
 #ss.save(save_path)
 
-img = Image.open('example.jpg')
-img = img.convert("HSV")
-width,height = img.size;
-pixel_access_object = img.load();
+
+
 
 kernel_blur = ((1,2,1),(2,8,2),(1,2,1))
 kernel_edge_detection_y = ((1,0,-1),(2,0,-2),(1,0,-1))
@@ -187,21 +185,25 @@ def to_map(pix_acc_obj):
     #            pix_acc_obj[i,j]=(0,255,255)
 
 
-
-#img = ImageEnhance.Contrast(img).enhance(1.5)
-gaussian_blur(pixel_access_object,1)
-print("pierwszy blur")
-is_edge=edge_detection(pixel_access_object,img)
-print("krawedzie")
-gaussian_blur(pixel_access_object,1)
-print("drugi blur")
-to_map(pixel_access_object)
-print("do mapki")
-for j in range(1,height-2):
-        for i in range(1,width-2):
-            if(is_edge[i][j]==1):
-               pixel_access_object[i,j]=(0,0,0)
-gaussian_blur(pixel_access_object,1)
-print("trzeci blur")
-img.show()
-
+for i in range(0,1):
+    img = Image.open(str(i)+'.jpg')
+    img = img.convert("HSV")
+    #img = ImageEnhance.Contrast(img).enhance(1.5)
+    width,height = img.size;
+    pixel_access_object = img.load();
+    gaussian_blur(pixel_access_object,1)
+    print("pierwszy blur")
+    is_edge=edge_detection(pixel_access_object,img)
+    print("krawedzie")
+    gaussian_blur(pixel_access_object,1)
+    print("drugi blur")
+    to_map(pixel_access_object)
+    print("do mapki")
+    for j in range(1,height-2):
+            for i in range(1,width-2):
+                if(is_edge[i][j]==1):
+                    pixel_access_object[i,j]=(0,0,0)
+    gaussian_blur(pixel_access_object,1)
+    print("trzeci blur")
+    img.show()
+    img.close()
